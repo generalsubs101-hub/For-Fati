@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0, viewport-fit=cover" name="viewport" />
+  <title>For Rouhi — May 18, 2026</title>
+
+  <link href="https://fonts.googleapis.com" rel="preconnect" />
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Funnel+Sans:wght@300;400;600&family=Pinyon+Script&family=Amiri:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    /* Original scroll animations preserved */
+    .animate-on-scroll-hidden {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .animate-on-scroll-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .bounce-in-hidden { opacity: 0; transform: scale(0.9) translateY(40px); }
+    .bounce-in-visible {
+      opacity: 1; transform: scale(1) translateY(0);
+      transition: opacity 0.8s cubic-bezier(0.34, 1.56, 0.64, 1),
+                  transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    /* Petal rain (preserved) */
+    @keyframes drop-petal {
+      0%   { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+      10%  { opacity: 1; }
+      90%  { opacity: 1; }
+      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    }
+    .petal { position: fixed; pointer-events: none; z-index: 5; animation: drop-petal linear infinite; }
+
+    /* Romantic background pulse (new, very subtle) */
+    @keyframes ambient-drift {
+      0%   { transform: translate3d(-1%, -1%, 0) scale(1); }
+      100% { transform: translate3d( 1%,  1%, 0) scale(1.04); }
+    }
+    .ambient {
+      position: fixed; inset: -8%;
+      pointer-events: none; z-index: 0;
+      background:
+        radial-gradient(40% 30% at 20% 20%, rgba(229,152,155,0.35), transparent 60%),
+        radial-gradient(40% 30% at 80% 30%, rgba(155,34,38,0.18),   transparent 60%),
+        radial-gradient(40% 30% at 50% 90%, rgba(254,226,226,0.55), transparent 60%);
+      filter: blur(20px);
+      animation: ambient-drift 22s ease-in-out infinite alternate;
+    }
+
+    /* Hand-drawn underline for highlights */
+    @keyframes shimmer-x {
+      to { background-position: 220% 0; }
+    }
+    .teteeez {
+      position: relative;
+      display: inline-block;
+      font-family: 'Pinyon Script', cursive;
+      font-weight: 500;
+      font-size: 1.55em;
+      line-height: 0.9;
+      padding: 0 0.08em;
+      background: linear-gradient(90deg,
+        #9B2226 0%, #AE2012 25%, #E5989B 50%, #F6C28B 65%, #AE2012 85%, #9B2226 100%);
+      background-size: 220% 100%;
+      -webkit-background-clip: text; background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 0 10px rgba(229, 152, 155, 0.55));
+      animation: shimmer-x 6s linear infinite, floaty 5s ease-in-out infinite;
+    }
+    .teteeez::after {
+      content: "";
+      position: absolute; left: 50%; bottom: -3px; width: 78%; height: 7px;
+      transform: translateX(-50%);
+      background: radial-gradient(closest-side, rgba(229,152,155,0.7), transparent 70%);
+      filter: blur(4px);
+    }
+    @keyframes floaty { 50% { transform: translateY(-1px); } }
+
+    .breathtaking {
+      font-style: italic;
+      color: #9B2226;
+      text-shadow: 0 0 14px rgba(229, 152, 155, 0.45);
+    }
+
+    /* Letter overlay (full-bleed expanded letter after envelope opens) */
+    .letter-overlay {
+      position: fixed; inset: 0; z-index: 70;
+      display: grid; place-items: center;
+      padding: clamp(12px, 3vh, 28px);
+      opacity: 0; visibility: hidden;
+      transition: opacity 0.6s ease, visibility 0s linear 0.6s;
+      perspective: 2400px;
+    }
+    .letter-overlay.show {
+      opacity: 1; visibility: visible;
+      transition: opacity 0.8s ease, visibility 0s linear 0s;
+    }
+    .letter-overlay::before {
+      content: "";
+      position: absolute; inset: 0;
+      background: radial-gradient(120% 80% at 50% 40%, rgba(155,34,38,0.18), rgba(0,0,0,0.55) 75%);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+    }
+
+    .letter-paper {
+      position: relative;
+      width: min(94vw, 700px);
+      max-height: min(94vh, 880px);
+      background:
+        linear-gradient(180deg, #fffcf8 0%, #fbf3e9 100%);
+      border-radius: 6px;
+      box-shadow:
+        0 40px 80px -20px rgba(40, 10, 20, 0.55),
+        0 12px 32px -10px rgba(0, 0, 0, 0.35),
+        inset 0 0 0 1px rgba(155,34,38,0.10);
+      transform-origin: 50% 80%;
+      transform: translateY(40vh) scale(0.18) rotateX(70deg);
+      opacity: 0;
+      transition:
+        transform 1.1s cubic-bezier(0.6, 0.05, 0.2, 1),
+        opacity 0.7s ease;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .letter-overlay.show .letter-paper {
+      transform: translateY(0) scale(1) rotateX(0);
+      opacity: 1;
+      transition-delay: 0.15s;
+    }
+
+    /* Paper crinkle + fold creases */
+    .letter-paper::before {
+      content: "";
+      position: absolute; inset: 0; pointer-events: none;
+      background-image: url('data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E');
+      opacity: 0.10;
+      mix-blend-mode: multiply;
+    }
+    .letter-paper .creases {
+      position: absolute; inset: 0; pointer-events: none;
+      background:
+        linear-gradient(180deg, transparent 32.8%, rgba(120,80,40,0.16) 33.1%, transparent 33.4%),
+        linear-gradient(180deg, transparent 65.8%, rgba(120,80,40,0.16) 66.1%, transparent 66.4%);
+      opacity: 0.9;
+      transition: opacity 1.6s ease 1.6s;
+    }
+    .letter-overlay.show .letter-paper .creases { opacity: 0; }
+
+    /* Reveal cascade for the inner content */
+    .reveal { opacity: 0; transform: translateY(10px); transition: opacity 0.9s ease, transform 0.9s ease; }
+    .letter-overlay.show .reveal { opacity: 1; transform: none; }
+    .letter-overlay.show .reveal.d1 { transition-delay: 1.4s; }
+    .letter-overlay.show .reveal.d2 { transition-delay: 1.7s; }
+    .letter-overlay.show .reveal.d3 { transition-delay: 2.0s; }
+    .letter-overlay.show .reveal.d4 { transition-delay: 2.5s; }
+    .letter-overlay.show .reveal.d5 { transition-delay: 3.2s; }
+
+    /* Arabic typing caret */
+    .typed::after {
+      content: "│";
+      display: inline-block; color: #9B2226;
+      margin-right: 2px;
+      animation: caret 1s steps(1) infinite;
+      font-weight: 300;
+    }
+    .typed.done::after { content: ""; }
+    @keyframes caret { 50% { opacity: 0; } }
+
+    /* Divider heart */
+    .heart-divider {
+      width: 12px; height: 12px;
+      background: #AE2012;
+      clip-path: path("M6 11 C 1 7, 1 3, 3.5 1.5 C 5 0.5, 5.5 1.5, 6 2.5 C 6.5 1.5, 7 0.5, 8.5 1.5 C 11 3, 11 7, 6 11 Z");
+      filter: drop-shadow(0 0 4px rgba(174, 32, 18, 0.6));
+      flex-shrink: 0;
+    }
+
+    /* Floating glow words */
+    @keyframes floatUp {
+      0%   { transform: translate3d(0, 10vh, 0) scale(0.9); opacity: 0; }
+      15%  { opacity: 0.85; }
+      85%  { opacity: 0.85; }
+      100% { transform: translate3d(0, -90vh, 0) scale(1.05); opacity: 0; }
+    }
+    .floater {
+      position: fixed;
+      font-family: 'Pinyon Script', cursive;
+      color: #fff2e3;
+      text-shadow:
+        0 0 12px rgba(229, 152, 155, 0.7),
+        0 0 28px rgba(174, 32, 18, 0.35);
+      pointer-events: none;
+      z-index: 65;
+      white-space: nowrap;
+      animation: floatUp linear forwards;
+    }
+
+    /* Heart pop on click in letter view */
+    @keyframes heartRise {
+      0%   { transform: translate(-50%, -50%) scale(0.4); opacity: 0; }
+      20%  { opacity: 1; }
+      100% { transform: translate(calc(-50% + var(--dx, 0px)), calc(-50% - 140px)) scale(1.1) rotate(var(--r, 0deg)); opacity: 0; }
+    }
+    .heart-pop {
+      position: fixed;
+      width: 14px; height: 14px;
+      background: #AE2012;
+      clip-path: path("M7 12 C 1 8, 1 3, 4 1.5 C 5.5 0.8, 6.3 1.7, 7 2.8 C 7.7 1.7, 8.5 0.8, 10 1.5 C 13 3, 13 8, 7 12 Z");
+      filter: drop-shadow(0 0 8px rgba(229, 152, 155, 0.7));
+      pointer-events: none;
+      z-index: 90;
+      animation: heartRise 1.6s ease-out forwards;
+    }
+
+    /* Audio cue */
+    .audio-cue {
+      position: fixed;
+      left: 50%; bottom: 18px;
+      transform: translateX(-50%);
+      padding: 9px 16px;
+      border-radius: 999px;
+      background: rgba(40, 15, 20, 0.65);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      color: #ffe6e6;
+      font-family: 'Funnel Sans', sans-serif;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      font-size: 10px;
+      border: 1px solid rgba(255, 220, 200, 0.2);
+      cursor: pointer;
+      z-index: 200;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .audio-cue.show { opacity: 1; }
+    .audio-cue .dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: #E5989B;
+      box-shadow: 0 0 10px #E5989B;
+      animation: pulseDot 1.4s ease-in-out infinite;
+    }
+    @keyframes pulseDot { 50% { opacity: 0.4; } }
+
+    /* Close button on letter */
+    .letter-close {
+      position: absolute; top: 14px; right: 14px;
+      width: 34px; height: 34px; border-radius: 50%;
+      background: rgba(155,34,38,0.08);
+      border: 1px solid rgba(155,34,38,0.18);
+      color: #9B2226;
+      display: grid; place-items: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .letter-close:hover { background: rgba(155,34,38,0.15); transform: scale(1.05); }
+    .letter-close svg { width: 14px; height: 14px; }
+
+    /* Hidden YouTube host — kept at real size offscreen so browsers actually play it */
+    .audio-host {
+      position: fixed;
+      left: 0; top: 0;
+      width: 320px; height: 200px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-9999px, -9999px);
+      z-index: -1;
+    }
+
+    /* Mobile fine-tuning — keep desktop LAYOUT, just shrink proportionally */
+    @media (max-width: 640px) {
+      /* Letter chrome */
+      .letter-paper {
+        width: 94vw;
+        max-height: 92vh;
+        border-radius: 5px;
+      }
+      .letter-close {
+        top: 8px; right: 8px;
+        width: 26px; height: 26px;
+      }
+      .letter-close svg { width: 11px; height: 11px; }
+
+      /* Header — keep side-by-side, just shrink */
+      .letter-paper > header {
+        padding: 18px 16px 8px 16px;
+        gap: 8px;
+      }
+      .letter-paper > header > div:first-child {
+        font-size: 22px;
+      }
+      .letter-paper > header > div:last-child {
+        font-size: 8px;
+        letter-spacing: 0.15em;
+      }
+
+      /* Body */
+      .letter-paper > section {
+        padding: 12px 16px;
+        gap: 10px;
+      }
+      /* Greeting ("Good evening, kbeeda.") */
+      .letter-paper > section > div:first-child {
+        font-size: 24px !important;
+      }
+      /* English paragraph block */
+      .letter-paper > section > div:nth-child(2) {
+        font-size: 13px !important;
+        line-height: 1.5 !important;
+      }
+      /* Arabic block */
+      .letter-paper > section > div:nth-child(4) {
+        font-size: 14px !important;
+        line-height: 1.75 !important;
+      }
+
+      /* Footer — keep side-by-side */
+      .letter-paper > footer {
+        padding: 8px 16px 18px 16px;
+        gap: 8px;
+      }
+      .letter-paper > footer > div:first-child > div:first-child,
+      .letter-paper > footer > div:last-child {
+        font-size: 7px;
+        letter-spacing: 0.12em;
+        white-space: nowrap;
+      }
+      /* "Yours, always —" stacks above "Momen" on mobile */
+      .letter-paper > footer > div:first-child {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 2px;
+      }
+      .letter-paper > footer > div:first-child > div:nth-child(2) {
+        font-size: 22px !important;
+        line-height: 1 !important;
+      }
+      .letter-paper > footer > div:last-child > div {
+        font-size: 9px;
+        white-space: nowrap;
+        letter-spacing: 0;
+      }
+
+      /* Floating words */
+      .floater { max-width: 80vw; }
+
+      /* Audio cue */
+      .audio-cue {
+        bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+        font-size: 9px;
+        letter-spacing: 0.18em;
+        padding: 7px 13px;
+      }
+
+      /* Page header */
+      #header-date {
+        font-size: 10px;
+        max-width: 60vw;
+        text-align: right;
+        line-height: 1.15;
+        display: inline-block;
+      }
+
+      /* Envelope section */
+      #envelope-section {
+        padding-top: 100px;
+        padding-bottom: 50px;
+        min-height: 100svh;
+      }
+      #envelope-section .max-w-lg { margin-top: 0 !important; max-width: 340px; }
+
+      /* Hide decorative bg sketches */
+      #envelope-section > div.absolute.top-10,
+      #envelope-section > div.absolute.bottom-20 { display: none; }
+
+      /* Envelope name area scales down */
+      #user-portrait { width: 42px; height: 42px; margin-bottom: 4px; }
+      .absolute.bottom-\[10\%\] h2 { font-size: 24px !important; }
+      .absolute.bottom-\[10\%\] p { font-size: 8px !important; }
+
+      /* Tap hint */
+      #tap-hint { bottom: -42px; }
+      #tap-hint span { font-size: 11px; }
+
+      /* Inner letter card preview */
+      #letter-content h3 { font-size: 32px !important; }
+      #letter-content p { font-size: 10px !important; }
+    }
+
+    @media (max-width: 380px) {
+      /* Extra tight for very small phones */
+      #envelope-section .max-w-lg { max-width: 92vw; padding-left: 12px; padding-right: 12px; }
+      .letter-paper > header,
+      .letter-paper > section,
+      .letter-paper > footer {
+        padding-left: 14px; padding-right: 14px;
+      }
+      .letter-paper > section > div:first-child { font-size: 22px !important; }
+      .letter-paper > section > div:nth-child(2) { font-size: 12.5px !important; }
+      .letter-paper > section > div:nth-child(4) { font-size: 13px !important; }
+    }
+
+    @media (max-height: 720px) and (max-width: 640px) {
+      .letter-paper { max-height: 94vh; }
+      .letter-paper > section { padding-top: 8px; padding-bottom: 8px; gap: 8px; }
+      .letter-paper > header { padding-top: 14px; padding-bottom: 6px; }
+      .letter-paper > footer { padding-top: 6px; padding-bottom: 14px; }
+    }
+
+    /* Hard fallback if content somehow overflows */
+    .letter-paper > section { overflow-y: auto; }
+    @supports (overflow: clip) {
+      .letter-paper { overscroll-behavior: contain; }
+    }
+  </style>
+
+  <style type="text/tailwindcss">
+    @tailwind base;
+    @tailwind components;
+    @tailwind utilities;
+
+    @layer base {
+      html { scroll-behavior: smooth; }
+      body { @apply antialiased; }
+    }
+
+    .blur-nav {
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+  </style>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      important: '#app-root',
+      theme: {
+        extend: {
+          colors: {
+            'brand-primary':     '#9B2226', /* Deep Crimson Red */
+            'brand-secondary':   '#AE2012', /* Passionate Red */
+            'neutral-background':'#FFF5F5', /* Soft Rose Tint */
+            'neutral-surface':   '#FEE2E2', /* Light Blush */
+            'text-primary':      '#2D2926',
+            'text-secondary':    '#5E544B',
+            'text-onPrimary':    '#FFFFFF',
+            'accent-pink':       '#E5989B',
+          },
+          fontFamily: {
+            'primary':   ['Libre Caslon Text', 'serif'],
+            'secondary': ['Funnel Sans', 'sans-serif'],
+            'script':    ['Pinyon Script', 'cursive'],
+            'arabic':    ['Amiri', 'serif'],
+          },
+          borderRadius: {
+            'none': '0px', 'sm': '8px', 'md': '16px', 'lg': '40px',
+          },
+          letterSpacing: {
+            'widest': '0.2em', 'tightest': '-0.04em',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+
+<body id="app-root" class="font-secondary bg-neutral-background text-text-primary overflow-x-hidden">
+
+  <div class="ambient" aria-hidden="true"></div>
+
+  <header class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 blur-nav bg-white/40 border-b border-brand-primary/5">
+    <nav class="max-w-[1200px] mx-auto h-20 flex items-center justify-between px-6">
+      <a class="font-primary text-2xl tracking-tightest text-brand-primary" href="#" aria-hidden="true"></a>
+      <div class="hidden md:flex items-center gap-10"></div>
+      <div class="flex items-center">
+        <span class="font-primary text-sm text-brand-primary italic" id="header-date">A letter — today</span>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="envelope-section" class="relative min-h-screen flex items-center justify-center bg-[#fdfaf6] pt-32 pb-10 overflow-hidden">
+
+      <!-- Decorative background sketches -->
+      <div class="absolute top-10 left-10 w-32 h-32 opacity-10 rotate-12 pointer-events-none">
+        <svg viewBox="0 0 100 100" fill="none" stroke="#9B2226" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M50 78 C 20 58, 18 30, 35 22 C 45 18, 50 28, 50 34 C 50 28, 55 18, 65 22 C 82 30, 80 58, 50 78 Z" />
+        </svg>
+      </div>
+      <div class="absolute bottom-20 right-10 w-48 h-48 opacity-10 -rotate-12 pointer-events-none">
+        <svg viewBox="0 0 100 100" fill="none" stroke="#9B2226" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="50" cy="40" r="14" />
+          <path d="M44 35 q 2 -4 6 -3 q 4 0 6 4" />
+          <path d="M50 54 v 32" />
+          <path d="M50 68 q -8 -2 -14 -10" />
+          <path d="M50 76 q  8 -2 14 -10" />
+        </svg>
+      </div>
+
+      <div class="relative z-10 w-full max-w-lg px-6 mt-20" style="perspective:1000px;">
+        <!-- Click area for envelope -->
+        <div id="envelope-trigger" class="relative w-full aspect-[4/3] cursor-pointer group" tabindex="0" role="button" aria-label="Open the letter">
+
+          <!-- 1. The Back of Envelope (Visual base) -->
+          <div class="absolute inset-0 bg-[#e8ded3] rounded-b-lg shadow-2xl"></div>
+
+          <!-- 2. The Letter Card (sandwiched inside — small preview) -->
+          <div id="letter-card" class="absolute inset-x-6 top-8 bottom-4 bg-[#fffcf8] shadow-sm flex flex-col p-4 z-10 transition-all duration-[1200ms] ease-in-out origin-bottom transform translate-y-0">
+            <div class="border-2 border-brand-primary/20 h-full p-6 flex flex-col items-center justify-center text-center relative bg-white overflow-hidden shadow-inner">
+              <div class="absolute inset-0 opacity-20 pointer-events-none mix-blend-multiply z-0" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E');"></div>
+              <div id="letter-content" class="relative z-10 w-full opacity-0 transition-opacity duration-700">
+                <p class="font-primary text-sm text-brand-primary italic tracking-widest uppercase mb-2">For my</p>
+                <h3 class="font-script text-5xl text-brand-primary leading-none">Rouhi</h3>
+                <p class="font-secondary text-xs text-text-secondary mt-3 tracking-widest uppercase">unfolding…</p>
+              </div>
+              <div class="absolute inset-0 bg-gradient-to-br from-white via-stone-50/50 to-orange-50/20 pointer-events-none z-0"></div>
+            </div>
+          </div>
+
+          <!-- 3. The Front Pocket -->
+          <div class="absolute bottom-0 left-0 right-0 h-4/5 bg-[#f4ece4] z-20 shadow-[0_-10px_20px_rgba(0,0,0,0.05)]"
+               style="clip-path: polygon(0 40%, 50% 50%, 100% 40%, 100% 100%, 0 100%);"></div>
+
+          <!-- Name plate + monogram (in front of pocket) -->
+          <div class="absolute bottom-[10%] left-0 right-0 z-40 text-center pointer-events-none flex flex-col items-center">
+            <div id="user-portrait" class="w-24 h-24 mb-2 transition-all duration-700"
+                 style="filter: drop-shadow(0 8px 18px rgba(120, 30, 40, 0.45)) drop-shadow(0 2px 4px rgba(120, 30, 40, 0.3));">
+              <img src="assets/wax-rose.png" alt="" width="96" height="96"
+                   style="width:100%; height:100%; display:block; object-fit:contain;" />
+            </div>
+            <h2 class="font-primary text-4xl text-text-primary tracking-tight">Fati</h2>
+            <p class="font-secondary text-[10px] tracking-widest uppercase text-brand-primary/80 mt-1">my kbeeda</p>
+          </div>
+
+          <!-- 4. The Top Flap -->
+          <div id="envelope-flap"
+               class="absolute top-0 left-0 right-0 h-[65%] bg-[#e2d5c8] z-30 origin-top transition-all duration-[900ms] ease-[cubic-bezier(0.4,0,0.2,1)] shadow-md"
+               style="clip-path: polygon(0 0, 100% 0, 50% 100%);">
+            <!-- Wax seal (removed) -->
+            <div id="wax-seal" style="display:none;"></div>
+          </div>
+
+          <!-- Hint -->
+          <div id="tap-hint" class="absolute -bottom-16 left-0 right-0 text-center">
+            <span class="text-sm font-semibold tracking-widest uppercase text-brand-primary animate-pulse"></span>
+          </div>
+
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Full letter overlay (revealed after envelope opens) -->
+  <div class="letter-overlay" id="letter-overlay" aria-hidden="true">
+    <article class="letter-paper" role="article">
+      <div class="creases" aria-hidden="true"></div>
+
+      <button class="letter-close" id="letter-close" aria-label="Fold letter back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M6 6l12 12M18 6L6 18"/>
+        </svg>
+      </button>
+
+      <header class="reveal d1 px-7 sm:px-12 pt-9 sm:pt-12 pb-4 flex items-baseline justify-between gap-4 border-b border-brand-primary/15">
+        <div class="font-script text-3xl sm:text-4xl text-brand-primary leading-none">
+          Momen <span class="text-accent-pink">&amp;</span> Fati
+        </div>
+        <div class="font-secondary text-[10px] sm:text-[11px] tracking-widest uppercase text-brand-primary/70 text-right">
+          <div id="letter-date">Monday · 18 May 2026</div>
+          <div class="opacity-60 mt-1">JORDAN⇄ CASABLANCA</div>
+        </div>
+      </header>
+
+      <section class="px-7 sm:px-12 py-5 sm:py-7 flex flex-col gap-4 sm:gap-5">
+
+        <div class="reveal d2 font-script text-brand-primary leading-none" style="font-size: clamp(28px, 5.2vw, 44px);">
+          <span id="greet">Good evening</span>, <span class="italic">kbeeda</span>.
+        </div>
+
+        <div class="reveal d3 font-primary text-text-primary" style="font-size: clamp(15px, 2.1vw, 19px); line-height: 1.55; max-width: 56ch;">
+          <p class="mb-3">Yesss… you looked sooo <span class="teteeez">teteeez</span> today. Yesterday you went to the salon… but honestly? I love you even without all that.</p>
+          <p>Still… today? You looked absolutely <span class="breathtaking">breathtaking</span> on our video call. Like… I couldn't look away.</p>
+        </div>
+
+        <div class="reveal d3 flex items-center gap-3 text-brand-primary/70" aria-hidden="true">
+          <span class="flex-1 h-px bg-gradient-to-r from-transparent via-brand-primary/40 to-transparent"></span>
+          <span class="heart-divider"></span>
+          <span class="flex-1 h-px bg-gradient-to-r from-transparent via-brand-primary/40 to-transparent"></span>
+        </div>
+
+        <div class="reveal d4 font-arabic text-text-primary" dir="rtl" lang="ar"
+             style="font-size: clamp(16px, 2.3vw, 21px); line-height: 1.95; text-align: right;">
+          <p class="mb-1"><span class="italic text-brand-primary">في مقولة بتحكي</span> <span class="typed" id="arabic1"></span></p>
+          <p class="mb-1"><span class="typed" id="arabic2"></span></p>
+          <p><span class="typed" id="arabic3"></span></p>
+        </div>
+
+      </section>
+
+      <footer class="reveal d5 px-7 sm:px-12 pb-8 sm:pb-10 pt-4 flex items-end justify-between gap-4 border-t border-brand-primary/15">
+        <div>
+          <div class="font-secondary text-[10px] sm:text-[11px] tracking-widest uppercase text-brand-primary/70">Yours, always —</div>
+          <div class="font-script text-brand-primary leading-none mt-1" style="font-size: clamp(32px, 5.2vw, 48px);">Momen</div>
+        </div>
+        <div class="text-right font-secondary text-[10px] sm:text-[11px] tracking-widest uppercase text-brand-secondary/90">
+          kanbgheek · kan7ma8 3leek
+          <div class="opacity-60 mt-1 normal-case tracking-normal font-primary italic text-[12px]">a kiss &amp; a hug, across the sea</div>
+        </div>
+      </footer>
+    </article>
+  </div>
+
+  <!-- Audio cue removed per request; music starts muted and unmutes on first interaction anywhere -->
+  <button class="audio-cue" id="audio-cue" aria-label="Tap once for music" style="display:none;">
+    <span class="dot"></span>
+    <span>Tap once for music</span>
+  </button>
+
+  <!-- Local music (autoplay muted; unmuted on first interaction) -->
+  <audio id="bg-music" src="assets/song.mp3" preload="auto" loop muted playsinline></audio>
+
+  <!-- Music controller: top-level so it runs immediately -->
+  <script>
+    (function () {
+      window.__rouhi = window.__rouhi || {};
+      const audio = document.getElementById('bg-music');
+      let started = false;
+
+      function tryAutoplay() {
+        if (!audio) return;
+        audio.muted = true;
+        audio.volume = 0;
+        const p = audio.play();
+        if (p && typeof p.then === 'function') {
+          p.catch(() => { /* will be unmuted by first gesture */ });
+        }
+      }
+      // Kick off muted autoplay immediately
+      tryAutoplay();
+      // Also try again on load in case the file wasn't ready
+      window.addEventListener('load', tryAutoplay);
+
+      window.__rouhi.unmuteMusic = function () {
+        if (!audio) return;
+        try {
+          audio.muted = false;
+          // Smooth fade-in
+          let v = audio.volume || 0;
+          const target = 0.75;
+          audio.volume = Math.max(v, 0.01);
+          const p = audio.play();
+          if (p && typeof p.catch === 'function') p.catch(() => {});
+          started = true;
+          const step = () => {
+            v = Math.min(target, (audio.volume || 0) + 0.05);
+            audio.volume = v;
+            if (v < target) setTimeout(step, 80);
+          };
+          step();
+        } catch (_) {}
+        const cue = document.getElementById('audio-cue');
+        if (cue) cue.classList.remove('show');
+      };
+
+      // Show the manual cue if autoplay was blocked after a short wait
+      setTimeout(() => {
+        if (!audio) return;
+        if (audio.paused || audio.muted) {
+          const cue = document.getElementById('audio-cue');
+          if (cue) cue.classList.add('show');
+        }
+      }, 1800);
+    })();
+  </script>
+
+  <footer class="relative bg-brand-primary text-neutral-background py-16 px-6 overflow-hidden">
+    <div class="max-w-7xl mx-auto flex flex-col items-center text-center gap-6 relative z-10">
+      <div class="font-script text-5xl">Forever yours.</div>
+      <p class="text-[10px] opacity-70 tracking-widest uppercase">— Momen, for my Rouhi</p>
+    </div>
+  </footer>
+
+  <!-- ───────── Envelope open + letter reveal logic ───────── -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const envelopeTrigger = document.getElementById('envelope-trigger');
+    const flap            = document.getElementById('envelope-flap');
+    const seal            = document.getElementById('wax-seal');
+    const letterCard      = document.getElementById('letter-card');
+    const letterContent   = document.getElementById('letter-content');
+    const tapHint         = document.getElementById('tap-hint');
+    const portrait        = document.getElementById('user-portrait');
+    const overlay         = document.getElementById('letter-overlay');
+    const closeBtn        = document.getElementById('letter-close');
+    const audioCue        = document.getElementById('audio-cue');
+
+    let isOpen = false;
+    let floaterTimer = null;
+
+    // ───────── Time-aware greeting (Jordan UTC+3) ─────────
+    function jordanNow() {
+      const now = new Date();
+      const utcMs = now.getTime() + now.getTimezoneOffset() * 60000;
+      return new Date(utcMs + 3 * 3600 * 1000);
+    }
+    function greetFor(h) {
+      if (h >= 5  && h < 12) return 'Good morning';
+      if (h >= 12 && h < 17) return 'Good afternoon';
+      if (h >= 17 && h < 22) return 'Good evening';
+      return 'Good night';
+    }
+    function fmtLong(d) {
+      return d.toLocaleDateString('en-GB', {
+        weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
+      });
+    }
+    (function setStrings() {
+      const d = jordanNow();
+      document.getElementById('greet').textContent       = greetFor(d.getHours());
+      document.getElementById('letter-date').textContent = fmtLong(d);
+      document.getElementById('header-date').textContent = 'A letter — ' + fmtLong(d);
+    })();
+
+    // ───────── Open envelope ─────────
+    function openEnvelope() {
+      if (isOpen) return;
+      isOpen = true;
+
+      // Wax seal pops, flap unfolds
+      seal.style.transform = 'translate(-50%, -50%) scale(1.25) rotate(-22deg)';
+      seal.style.opacity = '0';
+      flap.style.transform = 'rotateX(180deg)';
+
+      // Petal/heart burst
+      for (let i = 0; i < 28; i++) setTimeout(createHeartBurst, i * 22);
+
+      // Letter slides up out of envelope
+      setTimeout(() => {
+        flap.style.zIndex = '1';
+        letterCard.style.transform = 'translateY(-30vh) scale(1.02)';
+        letterContent.style.opacity = '1';
+        tapHint.style.opacity = '0';
+        tapHint.style.transition = 'opacity 0.4s ease';
+        portrait.style.transform = 'translateY(60px) scale(0.85)';
+        portrait.style.opacity = '0.4';
+      }, 380);
+
+      // Unmute music (counts as user gesture)
+      unmuteMusic();
+
+      // Reveal expanded letter overlay
+      setTimeout(() => {
+        overlay.classList.add('show');
+        overlay.setAttribute('aria-hidden', 'false');
+        // Start floating words
+        startFloaters();
+        // Begin Arabic typing
+        setTimeout(runArabicTyping, 2200);
+      }, 950);
+    }
+
+    function closeLetter() {
+      overlay.classList.remove('show');
+      overlay.setAttribute('aria-hidden', 'true');
+      stopFloaters();
+      // Reset envelope so user can re-open
+      setTimeout(() => {
+        isOpen = false;
+        flap.style.transform = '';
+        flap.style.zIndex = '30';
+        seal.style.transform = 'translate(-50%, -50%)';
+        seal.style.opacity = '1';
+        letterCard.style.transform = '';
+        letterContent.style.opacity = '0';
+        tapHint.style.opacity = '1';
+        portrait.style.transform = '';
+        portrait.style.opacity = '1';
+        resetArabicTyping();
+      }, 700);
+    }
+
+    envelopeTrigger.addEventListener('click', openEnvelope);
+    envelopeTrigger.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openEnvelope(); }
+    });
+    closeBtn.addEventListener('click', closeLetter);
+
+    // Esc closes
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && isOpen) closeLetter();
+    });
+
+    // ───────── Heart burst from envelope center ─────────
+    function createHeartBurst() {
+      const heart = document.createElement('div');
+      heart.innerHTML = ['❤️','💖','💝','💕','🌸'][Math.floor(Math.random() * 5)];
+      heart.style.position = 'fixed';
+
+      const rect = envelopeTrigger.getBoundingClientRect();
+      const startX = rect.left + rect.width / 2;
+      const startY = rect.top  + rect.height / 2;
+
+      heart.style.left = startX + 'px';
+      heart.style.top  = startY + 'px';
+      heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+      heart.style.zIndex = '100';
+      heart.style.pointerEvents = 'none';
+      heart.style.transition = 'all 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+      document.body.appendChild(heart);
+
+      const angle = Math.random() * Math.PI * 2;
+      const velocity = Math.random() * 320 + 120;
+      const destX = Math.cos(angle) * velocity;
+      const destY = Math.sin(angle) * velocity;
+
+      requestAnimationFrame(() => {
+        heart.style.transform = `translate(${destX}px, ${destY}px) scale(0) rotate(${Math.random() * 360}deg)`;
+        heart.style.opacity = '0';
+      });
+      setTimeout(() => heart.remove(), 1600);
+    }
+
+    // ───────── Floating glow words ─────────
+    const FLOAT_WORDS = [
+      'teteeez', 'breathtaking', 'Rouhi', 'kbeeda',
+      '3omry', 'kanbgheek', 'kan7ma8 3leek', 'lalet rouhi',
+      'Alleoo', 'bebe', 'ya hayati'
+    ];
+    function spawnFloater() {
+      if (!isOpen) return;
+      const el = document.createElement('span');
+      el.className = 'floater';
+      el.textContent = FLOAT_WORDS[Math.floor(Math.random() * FLOAT_WORDS.length)];
+      const size = 18 + Math.random() * 26;
+      el.style.fontSize = size + 'px';
+      el.style.left = (4 + Math.random() * 92) + 'vw';
+      el.style.bottom = (-10 - Math.random() * 8) + 'vh';
+      const dur = 14 + Math.random() * 10;
+      el.style.animationDuration = dur + 's';
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), dur * 1000 + 400);
+    }
+    function startFloaters() {
+      if (floaterTimer) return;
+      for (let i = 0; i < 3; i++) setTimeout(spawnFloater, i * 700);
+      floaterTimer = setInterval(spawnFloater, 1800);
+    }
+    function stopFloaters() {
+      clearInterval(floaterTimer); floaterTimer = null;
+    }
+
+    // ───────── Heart pop on clicks inside letter ─────────
+    function popHearts(x, y, count = 5) {
+      for (let i = 0; i < count; i++) {
+        const h = document.createElement('div');
+        h.className = 'heart-pop';
+        h.style.left = x + 'px';
+        h.style.top  = y + 'px';
+        const dx = (Math.random() * 80 - 40);
+        const r  = (Math.random() * 60 - 30);
+        h.style.setProperty('--dx', dx + 'px');
+        h.style.setProperty('--r',  r  + 'deg');
+        document.body.appendChild(h);
+        setTimeout(() => h.remove(), 1700);
+      }
+    }
+    overlay.addEventListener('click', (e) => {
+      if (e.target.closest('#letter-close')) return;
+      popHearts(e.clientX, e.clientY, 5);
+    });
+
+    // ───────── Arabic typing ─────────
+    const arabicLines = [
+      { id: 'arabic1', text: '«أن تُقاوِم ما تُحِبّ، وتتحمّل ما تكره»' },
+      { id: 'arabic2', text: 'وأنا مش قادر أقاوم حلاوتك 😊😊' },
+      { id: 'arabic3', text: 'ومش قادر أتحمّل بُعدك عنّي 💔' }
+    ];
+    function resetArabicTyping() {
+      arabicLines.forEach(l => {
+        const el = document.getElementById(l.id);
+        if (el) { el.textContent = ''; el.classList.remove('done'); }
+      });
+    }
+    function typeLine(el, text, speed) {
+      return new Promise((resolve) => {
+        el.textContent = '';
+        const chars = Array.from(text);
+        let i = 0;
+        function step() {
+          if (i >= chars.length) { el.classList.add('done'); return resolve(); }
+          el.textContent += chars[i++];
+          setTimeout(step, speed + Math.random() * 30);
+        }
+        step();
+      });
+    }
+    async function runArabicTyping() {
+      resetArabicTyping();
+      for (const l of arabicLines) {
+        const el = document.getElementById(l.id);
+        if (!el) continue;
+        await typeLine(el, l.text, 38);
+        await new Promise(r => setTimeout(r, 260));
+      }
+    }
+
+    // ───────── YouTube hidden autoplay (via IFrame API, initialized at top level) ─────────
+    function unmuteMusic() {
+      if (window.__rouhi && typeof window.__rouhi.unmuteMusic === 'function') {
+        window.__rouhi.unmuteMusic();
+      }
+      audioCue.classList.remove('show');
+    }
+
+    // If user hasn't opened envelope after a moment, gently surface the cue
+    setTimeout(() => {
+      if (!isOpen) audioCue.classList.add('show');
+    }, 2400);
+    audioCue.addEventListener('click', (e) => {
+      e.stopPropagation();
+      unmuteMusic();
+    });
+    // Any first interaction unmutes
+    ['pointerdown', 'touchstart', 'keydown'].forEach(ev => {
+      window.addEventListener(ev, () => { unmuteMusic(); }, { once: true });
+    });
+
+    // ───────── Subtle envelope parallax (pre-open only) ─────────
+    let raf = null, mx = 0, my = 0;
+    function onMove(e) {
+      const p = e.touches ? e.touches[0] : e;
+      const cx = window.innerWidth / 2;
+      const cy = window.innerHeight / 2;
+      mx = (p.clientX - cx) / cx;
+      my = (p.clientY - cy) / cy;
+      if (!raf) raf = requestAnimationFrame(apply);
+    }
+    function apply() {
+      raf = null;
+      if (isOpen) return;
+      const rx = (-my * 5).toFixed(2);
+      const ry = ( mx * 7).toFixed(2);
+      envelopeTrigger.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg)`;
+    }
+    window.addEventListener('mousemove', onMove, { passive: true });
+    window.addEventListener('touchmove', onMove, { passive: true });
+  });
+  </script>
+
+  <!-- Petal rain + scroll observers (preserved from original) -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('animate-on-scroll-visible');
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('[data-animation-on-scroll]').forEach(el => {
+        if (el.dataset.animationType !== 'bounce') el.classList.add('animate-on-scroll-hidden');
+        observer.observe(el);
+      });
+
+      const bounceObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) entry.target.classList.add('bounce-in-visible');
+        });
+      }, { threshold: 0.1 });
+      document.querySelectorAll('[data-animation-type="bounce"]').forEach(el => {
+        el.classList.add('bounce-in-hidden');
+        bounceObserver.observe(el);
+      });
+
+      // Petal rain
+      const container = document.body;
+      const colors = ['#FEE2E2', '#FECACA', '#FCA5A5', '#F87171', '#E5989B'];
+      setInterval(() => {
+        const petal = document.createElement('div');
+        petal.classList.add('petal');
+        petal.style.left = Math.random() * 100 + 'vw';
+        const size = Math.random() * 14 + 9;
+        petal.style.width  = size + 'px';
+        petal.style.height = size + 'px';
+        petal.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        petal.style.borderRadius = '20% 80% 20% 80%';
+        petal.style.animationDuration = (Math.random() * 5 + 6) + 's';
+        petal.style.opacity = Math.random() * 0.8 + 0.2;
+        container.appendChild(petal);
+        setTimeout(() => petal.remove(), 12000);
+      }, 600);
+    });
+  </script>
+</body>
+</html>

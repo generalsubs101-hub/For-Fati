@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>For Rouhi — May 19, 2026</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bowlby+One&family=Special+Elite&family=Caveat:wght@400;700&family=Space+Grotesk:wght@400;500;700&family=Amiri:wght@400;700&display=swap" rel="stylesheet" />
+
+<style>
+  :root {
+    --paper: #f4ecdc;
+    --paper-dark: #e8dcc2;
+    --ink: #1a1612;
+    --ink-soft: #3d322a;
+    --red: #c92a2a;
+    --red-dark: #8b1d1d;
+    --pink: #ff8094;
+    --pink-soft: #ffd6dd;
+    --yellow: #ffd84d;
+    --blue: #2c5f8a;
+    --green: #4a8c3f;
+  }
+
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'Space Grotesk', sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+    /* Newsprint texture */
+    background-image:
+      radial-gradient(circle at 25% 30%, rgba(201,42,42,0.04) 0, transparent 50%),
+      radial-gradient(circle at 75% 60%, rgba(44,95,138,0.04) 0, transparent 50%),
+      url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0.1 0 0 0 0 0.08 0 0 0 0 0.06 0 0 0 0.18 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .impact { font-family: 'Anton', Impact, sans-serif; letter-spacing: 0.02em; }
+  .chunk  { font-family: 'Bowlby One', cursive; }
+  .type   { font-family: 'Special Elite', monospace; }
+  .hand   { font-family: 'Caveat', cursive; }
+  .ar     { font-family: 'Amiri', serif; }
+
+  /* ───────── AUDIO PILL ───────── */
+  .audio-pill {
+    position: fixed; top: 14px; right: 14px;
+    z-index: 200;
+    display: flex; align-items: center; gap: 10px;
+    background: var(--ink); color: var(--paper);
+    padding: 8px 14px 8px 8px;
+    border-radius: 999px;
+    box-shadow: 0 6px 0 var(--red-dark), 0 10px 20px rgba(0,0,0,0.15);
+    cursor: pointer;
+    user-select: none;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    transition: transform 0.2s ease;
+  }
+  .audio-pill:hover { transform: translateY(-2px); }
+  .audio-pill .vinyl {
+    width: 28px; height: 28px; border-radius: 50%;
+    background: radial-gradient(circle, var(--paper) 18%, var(--red) 19%, var(--red) 24%, var(--ink) 25%);
+    box-shadow: inset 0 0 0 1px var(--red-dark);
+    flex-shrink: 0;
+  }
+  .audio-pill.playing .vinyl {
+    animation: spin 3s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .audio-pill .label { white-space: nowrap; }
+
+  /* ───────── MASTHEAD ───────── */
+  .masthead {
+    text-align: center;
+    padding: 60px 20px 18px;
+    border-bottom: 3px double var(--ink);
+    position: relative;
+  }
+  .masthead-tape {
+    display: inline-block;
+    background: var(--yellow);
+    color: var(--ink);
+    font-family: 'Special Elite', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    padding: 4px 14px;
+    transform: rotate(-1.2deg);
+    box-shadow: 2px 2px 0 var(--ink);
+    margin-bottom: 18px;
+  }
+  .paper-title {
+    font-family: 'Bowlby One', cursive;
+    font-size: clamp(48px, 12vw, 128px);
+    margin: 0;
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-shadow: 4px 4px 0 var(--red);
+  }
+  .paper-sub {
+    font-family: 'Special Elite', monospace;
+    font-size: clamp(11px, 1.8vw, 14px);
+    color: var(--ink-soft);
+    margin-top: 10px;
+    font-style: italic;
+  }
+  .paper-meta {
+    display: flex; justify-content: space-between; align-items: center;
+    max-width: 1200px; margin: 14px auto 0; padding: 0 8px;
+    font-family: 'Special Elite', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    flex-wrap: wrap; gap: 8px;
+  }
+
+  /* ───────── HERO ───────── */
+  .hero {
+    max-width: 1200px;
+    margin: 28px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 22px;
+    align-items: start;
+  }
+  .meme-frame {
+    background: #000;
+    border: 4px solid var(--ink);
+    box-shadow: 8px 8px 0 var(--red);
+    overflow: hidden;
+    position: relative;
+  }
+  .meme-frame img { width: 100%; display: block; }
+  .meme-cap {
+    font-family: 'Anton', Impact, sans-serif;
+    color: #fff;
+    text-shadow: 2px 2px 0 #000, -2px -2px 0 #000, 2px -2px 0 #000, -2px 2px 0 #000, 0 0 8px #000;
+    text-align: center;
+    text-transform: uppercase;
+    line-height: 1;
+    padding: 14px 12px;
+    background: #000;
+    letter-spacing: 0.02em;
+  }
+  .meme-cap.top    { font-size: clamp(20px, 4vw, 38px); }
+  .meme-cap.bottom { font-size: clamp(18px, 3.4vw, 32px); }
+
+  .hero-side {
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .chart {
+    background: var(--paper-dark);
+    border: 3px solid var(--ink);
+    padding: 16px 18px;
+    box-shadow: 6px 6px 0 var(--ink);
+    position: relative;
+  }
+  .chart::before {
+    content: "MEDICAL CHART";
+    position: absolute; top: -12px; left: 12px;
+    background: var(--red); color: var(--paper);
+    font-family: 'Anton', sans-serif;
+    font-size: 13px; letter-spacing: 0.15em;
+    padding: 2px 10px;
+  }
+  .chart-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px dashed var(--ink-soft); gap: 8px; }
+  .chart-row:last-child { border-bottom: none; }
+  .chart-row .k {
+    font-family: 'Special Elite', monospace;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--ink-soft);
+    flex-shrink: 0;
+  }
+  .chart-row .v {
+    font-family: 'Anton', sans-serif;
+    font-size: 15px; text-transform: uppercase;
+    text-align: right;
+  }
+  .chart-row .v.red { color: var(--red); }
+
+  .quote-box {
+    background: var(--ink); color: var(--paper);
+    padding: 18px 20px;
+    border: 3px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--pink);
+  }
+  .quote-box .q {
+    font-family: 'Caveat', cursive;
+    font-size: 26px;
+    line-height: 1.1;
+  }
+  .quote-box .a {
+    font-family: 'Special Elite', monospace;
+    font-size: 10px; letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--pink);
+    margin-top: 8px;
+  }
+
+  /* ───────── LIVE STATS ───────── */
+  .stats {
+    max-width: 1200px;
+    margin: 28px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 14px;
+  }
+  .stat {
+    background: var(--paper);
+    border: 3px solid var(--ink);
+    padding: 14px;
+    text-align: center;
+    box-shadow: 4px 4px 0 var(--ink);
+    cursor: pointer;
+    transition: transform 0.15s ease;
+  }
+  .stat:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink); }
+  .stat .num {
+    font-family: 'Bowlby One', cursive;
+    font-size: clamp(22px, 3vw, 34px);
+    color: var(--red);
+    line-height: 1;
+  }
+  .stat .cap {
+    font-family: 'Special Elite', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-top: 8px;
+    line-height: 1.3;
+  }
+
+  /* ───────── MEME GRID ───────── */
+  .section-bar {
+    max-width: 1200px;
+    margin: 50px auto 18px;
+    padding: 0 20px;
+    display: flex; align-items: center; gap: 14px;
+  }
+  .section-bar h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(22px, 3.5vw, 36px);
+    margin: 0;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .section-bar .line { flex: 1; height: 4px; background: var(--ink); }
+  .section-bar .dot { width: 14px; height: 14px; background: var(--red); border-radius: 50%; }
+
+  .meme-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 18px;
+  }
+
+  .meme-card {
+    background: var(--paper);
+    border: 3px solid var(--ink);
+    box-shadow: 6px 6px 0 var(--ink);
+    display: flex; flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    transition: transform 0.2s ease;
+  }
+  .meme-card:hover { transform: translate(-3px, -3px); box-shadow: 9px 9px 0 var(--ink); }
+  .meme-card .tag {
+    position: absolute; top: 10px; left: -6px;
+    background: var(--red); color: var(--paper);
+    font-family: 'Anton', sans-serif;
+    font-size: 11px; letter-spacing: 0.12em;
+    padding: 3px 10px;
+    z-index: 4;
+  }
+  .meme-card .by {
+    font-family: 'Special Elite', monospace;
+    font-size: 10px; color: var(--ink-soft);
+    padding: 8px 12px;
+    border-top: 1px dashed var(--ink-soft);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    display: flex; justify-content: space-between;
+  }
+
+  /* Span helpers */
+  .span-4 { grid-column: span 4; }
+  .span-6 { grid-column: span 6; }
+  .span-8 { grid-column: span 8; }
+  .span-12 { grid-column: span 12; }
+
+  /* Drake meme */
+  .drake {
+    display: grid; grid-template-columns: 1fr 1.4fr; min-height: 360px;
+  }
+  .drake-imgs { display: flex; flex-direction: column; }
+  .drake-panel {
+    flex: 1; display: grid; place-items: center;
+    font-size: 80px;
+    position: relative;
+    background: #f0e6d0;
+  }
+  .drake-panel:nth-child(1) { background: #d4c4a8; border-bottom: 3px solid var(--ink); }
+  .drake-panel:nth-child(2) { background: #e8d8b8; }
+  .drake-text { display: flex; flex-direction: column; }
+  .drake-text > div {
+    flex: 1; display: flex; align-items: center;
+    padding: 16px 18px;
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(15px, 1.8vw, 22px);
+    line-height: 1.15;
+    text-transform: uppercase;
+    border-left: 3px solid var(--ink);
+  }
+  .drake-text > div:first-child { border-bottom: 3px solid var(--ink); background: var(--paper); }
+  .drake-text > div:last-child  { background: var(--pink-soft); }
+
+  /* Galaxy brain */
+  .galaxy { padding: 0; }
+  .gx-row {
+    display: grid; grid-template-columns: 1fr 1.6fr;
+    border-bottom: 3px solid var(--ink);
+    min-height: 90px;
+  }
+  .gx-row:last-child { border-bottom: none; }
+  .gx-icon {
+    display: grid; place-items: center;
+    background: var(--ink); color: var(--paper);
+    font-size: 36px;
+    border-right: 3px solid var(--ink);
+    position: relative;
+  }
+  .gx-row:nth-child(1) .gx-icon { background: #2a2a2a; }
+  .gx-row:nth-child(2) .gx-icon { background: #3a2a4a; box-shadow: inset 0 0 20px rgba(255,200,255,0.3); }
+  .gx-row:nth-child(3) .gx-icon { background: linear-gradient(135deg, #4a1a5a, #2a4a8a); box-shadow: inset 0 0 30px rgba(200,180,255,0.5); }
+  .gx-row:nth-child(4) .gx-icon { background: radial-gradient(circle, #ff4a8a, #5a1a8a, #1a1a3a); box-shadow: inset 0 0 40px rgba(255,255,255,0.5), 0 0 20px rgba(255,150,200,0.4); }
+  .gx-text {
+    padding: 12px 16px;
+    display: flex; align-items: center;
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(14px, 1.6vw, 18px);
+    text-transform: uppercase;
+    line-height: 1.2;
+  }
+
+  /* This is fine */
+  .fine {
+    background: linear-gradient(180deg, #ff8844 0%, #cc4422 100%);
+    padding: 0;
+    color: #fff;
+    min-height: 360px;
+    display: flex; flex-direction: column;
+  }
+  .fine-stage {
+    flex: 1; display: grid; place-items: center;
+    position: relative; overflow: hidden;
+  }
+  .fine-stage::before, .fine-stage::after {
+    content: ""; position: absolute;
+    background: radial-gradient(ellipse at center bottom, #ffdd44 0%, transparent 60%);
+    width: 100%; height: 60%;
+    bottom: 0; left: 0;
+    animation: flicker 1.4s ease-in-out infinite alternate;
+  }
+  .fine-stage::after { animation-delay: -0.7s; opacity: 0.6; }
+  @keyframes flicker {
+    0%   { transform: scaleY(1) translateY(0); opacity: 0.7; }
+    100% { transform: scaleY(1.15) translateY(-4%); opacity: 1; }
+  }
+  .fine-dog {
+    position: relative; z-index: 2;
+    font-size: 70px;
+    filter: drop-shadow(0 4px 0 rgba(0,0,0,0.3));
+  }
+  .fine-cap {
+    background: rgba(0,0,0,0.85);
+    padding: 14px 16px;
+    text-align: center;
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(15px, 2vw, 20px);
+    text-transform: uppercase;
+    line-height: 1.2;
+    border-top: 3px solid #000;
+  }
+
+  /* Phone refresh meme */
+  .phone-meme {
+    background: #1a1a1a;
+    color: #fff;
+    padding: 18px;
+    min-height: 360px;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .phone-meme .ph {
+    flex: 1;
+    background: #2a2a2a;
+    border-radius: 28px;
+    padding: 14px;
+    display: flex; flex-direction: column;
+    box-shadow: inset 0 0 0 2px #444, 0 0 30px rgba(255,128,148,0.2);
+    position: relative;
+  }
+  .phone-meme .top-bar {
+    display: flex; justify-content: space-between; align-items: center;
+    font-family: 'Space Grotesk', sans-serif; font-size: 10px; opacity: 0.7;
+    padding-bottom: 8px; border-bottom: 1px solid #444;
+  }
+  .phone-meme .conv {
+    flex: 1; padding-top: 10px; display: flex; flex-direction: column; gap: 6px;
+    font-size: 13px;
+  }
+  .phone-meme .msg {
+    padding: 8px 12px; border-radius: 14px; max-width: 78%;
+    line-height: 1.3;
+  }
+  .phone-meme .me  { background: #ff8094; color: #fff; align-self: flex-end; border-bottom-right-radius: 4px; }
+  .phone-meme .her { background: #3a3a3a; color: #eee; align-self: flex-start; border-bottom-left-radius: 4px; }
+  .phone-meme .pending { opacity: 0.4; font-style: italic; align-self: flex-end; font-size: 11px; }
+  .phone-meme .pending::after { content: "..."; animation: dots 1.4s steps(4) infinite; }
+  @keyframes dots { 0%{content:".";}33%{content:"..";}66%{content:"...";}100%{content:"";} }
+  .phone-meme .cap {
+    text-align: center;
+    font-family: 'Anton', sans-serif;
+    font-size: 18px;
+    text-transform: uppercase;
+    line-height: 1.15;
+    color: #ff8094;
+  }
+
+  /* Loss meme (text) */
+  .loss {
+    padding: 24px;
+    display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr;
+    min-height: 280px; background: var(--paper);
+  }
+  .loss-cell {
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 10px;
+    border-right: 2px solid var(--ink);
+    border-bottom: 2px solid var(--ink);
+    padding: 16px;
+  }
+  .loss-cell:nth-child(2n) { border-right: none; }
+  .loss-cell:nth-child(n+3) { border-bottom: none; }
+  .loss-glyph {
+    font-family: 'Bowlby One', cursive;
+    font-size: clamp(32px, 5vw, 52px);
+    letter-spacing: 0.1em;
+    color: var(--ink);
+  }
+  .loss-cap {
+    font-family: 'Special Elite', monospace;
+    font-size: 11px;
+    text-align: center;
+    color: var(--ink-soft);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    line-height: 1.3;
+  }
+
+  /* Big headline card */
+  .headline {
+    background: var(--ink); color: var(--paper);
+    padding: 24px 22px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    min-height: 260px;
+    position: relative;
+  }
+  .headline .label {
+    font-family: 'Special Elite', monospace;
+    font-size: 11px; color: var(--pink);
+    letter-spacing: 0.18em; text-transform: uppercase;
+  }
+  .headline h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(28px, 4vw, 48px);
+    margin: 10px 0 0;
+    line-height: 0.95;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+  .headline h3 .pinky { color: var(--pink); }
+  .headline .by {
+    color: var(--pink-soft); border-color: rgba(255,255,255,0.2);
+  }
+
+  /* ───────── MISSING-YOU METER ───────── */
+  .game-wrap {
+    max-width: 1200px; margin: 60px auto 40px;
+    padding: 0 20px;
+  }
+  .game-card {
+    background: linear-gradient(135deg, var(--pink-soft), #fff);
+    border: 4px solid var(--ink);
+    box-shadow: 10px 10px 0 var(--red);
+    padding: 30px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .game-card::before {
+    content: "";
+    position: absolute; inset: 0;
+    background-image: radial-gradient(var(--ink) 1px, transparent 1.5px);
+    background-size: 16px 16px;
+    opacity: 0.04;
+    pointer-events: none;
+  }
+  .game-card h2 {
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(28px, 4.5vw, 48px);
+    margin: 0 0 6px;
+    text-transform: uppercase;
+    color: var(--red-dark);
+    line-height: 1;
+  }
+  .game-card .sub {
+    font-family: 'Special Elite', monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+  .meter {
+    width: 100%; max-width: 560px; margin: 0 auto 18px;
+    height: 38px;
+    background: var(--paper);
+    border: 3px solid var(--ink);
+    position: relative;
+    box-shadow: inset 0 0 0 1px var(--paper-dark);
+    overflow: hidden;
+  }
+  .meter-fill {
+    position: absolute; inset: 0;
+    width: 0%;
+    background: repeating-linear-gradient(
+      45deg,
+      var(--red) 0 14px,
+      var(--red-dark) 14px 28px
+    );
+    transition: width 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .meter-label {
+    position: absolute; inset: 0;
+    display: grid; place-items: center;
+    font-family: 'Bowlby One', cursive;
+    font-size: 18px;
+    color: var(--ink);
+    mix-blend-mode: difference;
+    color: #fff;
+    z-index: 2;
+  }
+  .miss-btn {
+    background: var(--red);
+    color: var(--paper);
+    border: 3px solid var(--ink);
+    padding: 14px 28px;
+    font-family: 'Anton', sans-serif;
+    font-size: clamp(18px, 2.4vw, 24px);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    box-shadow: 6px 6px 0 var(--ink);
+    transition: transform 0.06s ease, box-shadow 0.06s ease;
+  }
+  .miss-btn:active {
+    transform: translate(4px, 4px);
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .miss-btn:hover { background: var(--red-dark); }
+  .game-hint {
+    margin-top: 14px;
+    font-family: 'Caveat', cursive;
+    font-size: 20px;
+    color: var(--ink-soft);
+  }
+
+  /* ───────── CODEWORDS BAR ───────── */
+  .codes-section {
+    max-width: 1200px; margin: 0 auto 40px;
+    padding: 0 20px;
+  }
+  .codes-card {
+    background: var(--paper-dark);
+    border: 3px solid var(--ink);
+    box-shadow: 8px 8px 0 var(--ink);
+    padding: 22px 24px;
+  }
+  .codes-card h3 {
+    font-family: 'Anton', sans-serif;
+    font-size: 22px;
+    margin: 0 0 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+  .codes-card .lead {
+    font-family: 'Special Elite', monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+    margin-bottom: 18px;
+    letter-spacing: 0.05em;
+  }
+  .code-chips {
+    display: flex; flex-wrap: wrap; gap: 10px;
+  }
+  .chip {
+    background: var(--paper);
+    border: 2px solid var(--ink);
+    padding: 8px 14px;
+    font-family: 'Anton', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    box-shadow: 3px 3px 0 var(--ink);
+    transition: all 0.12s ease;
+    user-select: none;
+    text-transform: uppercase;
+  }
+  .chip:hover { background: var(--pink-soft); transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--ink); }
+  .chip:active { transform: translate(2px, 2px); box-shadow: 1px 1px 0 var(--ink); }
+  .chip.spice { background: var(--ink); color: var(--paper); }
+  .chip.spice:hover { background: var(--red); color: var(--paper); }
+
+  /* ───────── LOVE LETTER (tiny) ───────── */
+  .letter-section {
+    max-width: 760px; margin: 60px auto 40px;
+    padding: 0 20px;
+  }
+  .love-note {
+    background: var(--paper);
+    border: 3px solid var(--ink);
+    padding: 36px 32px 30px;
+    box-shadow: 12px 12px 0 var(--pink);
+    position: relative;
+  }
+  .love-note .stamp {
+    position: absolute;
+    top: -18px; right: 24px;
+    background: var(--red);
+    color: var(--paper);
+    font-family: 'Anton', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.12em;
+    padding: 6px 14px;
+    border: 2px solid var(--ink);
+    transform: rotate(3deg);
+    box-shadow: 3px 3px 0 var(--ink);
+  }
+  .love-note h2 {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(34px, 5.5vw, 52px);
+    margin: 0 0 8px;
+    color: var(--red-dark);
+    line-height: 1;
+  }
+  .love-note .ps {
+    font-family: 'Special Elite', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .love-note p {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(20px, 2.6vw, 26px);
+    line-height: 1.35;
+    color: var(--ink);
+    margin: 0 0 14px;
+  }
+  .love-note .sig {
+    font-family: 'Caveat', cursive;
+    font-size: clamp(28px, 4vw, 38px);
+    color: var(--red-dark);
+    margin-top: 18px;
+    text-align: right;
+  }
+  .love-note .codes-line {
+    margin-top: 10px;
+    font-family: 'Special Elite', monospace;
+    font-size: 10px;
+    color: var(--ink-soft);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-align: right;
+  }
+
+  /* ───────── FOOTER ───────── */
+  footer {
+    background: var(--ink); color: var(--paper);
+    text-align: center;
+    padding: 30px 20px;
+    font-family: 'Special Elite', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+  }
+  footer .heart { color: var(--pink); }
+  footer .easter {
+    margin-top: 8px; opacity: 0.6; font-size: 10px;
+  }
+
+  /* ───────── FLOATIES / EASTER EGGS ───────── */
+  .floater {
+    position: fixed; pointer-events: none;
+    font-family: 'Caveat', cursive;
+    color: var(--red);
+    z-index: 250;
+    user-select: none;
+    text-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    animation: rise 2.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  @keyframes rise {
+    0%   { opacity: 0; transform: translate(-50%, 0) scale(0.6); }
+    20%  { opacity: 1; }
+    100% { opacity: 0; transform: translate(calc(-50% + var(--dx, 0px)), -180px) scale(1.1) rotate(var(--r, 0deg)); }
+  }
+
+  /* Call overlay */
+  .call-overlay {
+    position: fixed; inset: 0; z-index: 500;
+    background: rgba(0,0,0,0.85);
+    backdrop-filter: blur(8px);
+    display: none; place-items: center;
+    padding: 20px;
+  }
+  .call-overlay.show { display: grid; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .call-card {
+    background: #1a1a1a;
+    color: #fff;
+    border-radius: 24px;
+    padding: 40px 30px 30px;
+    width: min(360px, 90vw);
+    text-align: center;
+    border: 1px solid #333;
+    box-shadow: 0 20px 60px rgba(255,128,148,0.3);
+  }
+  .call-card .avatar {
+    width: 110px; height: 110px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--pink), var(--red));
+    display: grid; place-items: center;
+    font-family: 'Caveat', cursive;
+    font-size: 64px;
+    color: #fff;
+    box-shadow: 0 0 0 4px rgba(255,128,148,0.3);
+    animation: pulseRing 1.4s ease-out infinite;
+  }
+  @keyframes pulseRing {
+    0% { box-shadow: 0 0 0 0 rgba(255,128,148,0.5), 0 0 0 8px rgba(255,128,148,0.2); }
+    100% { box-shadow: 0 0 0 24px rgba(255,128,148,0), 0 0 0 48px rgba(255,128,148,0); }
+  }
+  .call-card .name { font-family: 'Bowlby One', cursive; font-size: 28px; margin-bottom: 4px; }
+  .call-card .status { font-size: 13px; color: #aaa; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 24px; }
+  .call-card .status .live-dot {
+    display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+    background: #4ade80; margin-right: 6px;
+    animation: blink 1s ease-in-out infinite;
+  }
+  @keyframes blink { 50% { opacity: 0.3; } }
+  .call-actions { display: flex; justify-content: center; gap: 24px; }
+  .call-btn {
+    width: 60px; height: 60px; border-radius: 50%;
+    border: none; cursor: pointer;
+    display: grid; place-items: center;
+    font-size: 28px; color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.15s ease;
+  }
+  .call-btn:hover { transform: scale(1.08); }
+  .call-btn.decline { background: #d23838; }
+  .call-btn.accept { background: #4ade80; animation: shake 0.7s ease-in-out infinite; }
+  @keyframes shake {
+    0%,100% { transform: rotate(0deg); }
+    25% { transform: rotate(-12deg); }
+    75% { transform: rotate(12deg); }
+  }
+
+  /* Konami / secret toast */
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%);
+    background: var(--ink); color: var(--paper);
+    padding: 12px 22px;
+    font-family: 'Anton', sans-serif;
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    z-index: 300;
+    border: 2px solid var(--red);
+    box-shadow: 4px 4px 0 var(--red);
+    opacity: 0; transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+  }
+  .toast.show { opacity: 1; transform: translateX(-50%) translateY(-8px); }
+
+  /* ───────── RESPONSIVE ───────── */
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .span-4, .span-6, .span-8 { grid-column: span 12; }
+    .audio-pill { top: 10px; right: 10px; padding: 6px 12px 6px 6px; font-size: 11px; }
+    .audio-pill .label { max-width: 130px; overflow: hidden; text-overflow: ellipsis; }
+  }
+  @media (max-width: 560px) {
+    .masthead { padding: 50px 14px 14px; }
+    .meme-grid { gap: 14px; padding: 0 14px; }
+    .hero { padding: 0 14px; gap: 16px; }
+    .stats { padding: 0 14px; gap: 10px; grid-template-columns: repeat(2, 1fr); }
+    .stat { padding: 10px 8px; }
+    .section-bar { padding: 0 14px; }
+    .game-wrap, .codes-section, .letter-section { padding: 0 14px; }
+    .game-card { padding: 22px 16px; }
+    .love-note { padding: 26px 20px 22px; box-shadow: 7px 7px 0 var(--pink); }
+    .drake { grid-template-columns: 1fr 1.6fr; }
+    .drake-panel { font-size: 50px; }
+    .meme-frame { box-shadow: 5px 5px 0 var(--red); }
+    .paper-meta { font-size: 9px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ───────── AUDIO ───────── -->
+<audio id="bg-audio" src="assets/all-by-myself.mp3" preload="auto" loop></audio>
+
+<button class="audio-pill" id="audio-pill" aria-label="Toggle music">
+  <span class="vinyl"></span>
+  <span class="label" id="audio-label">▶ All By Myself</span>
+</button>
+
+<!-- ───────── MASTHEAD ───────── -->
+<header class="masthead">
+  <div class="masthead-tape">FOR ROUHI · TUESDAY EDITION · CIRCULATION: 1 (HER)</div>
+  <h1 class="paper-title">THE LONELY TIMES</h1>
+  <div class="paper-sub">"All the news that's fit to whine about" — Vol. ∞, No. waiting-for-her-call</div>
+  <div class="paper-meta">
+    <span id="meta-date">TUE · 19 MAY 2026</span>
+    <span>EDITOR-IN-CHIEF: <strong>MOMEN</strong></span>
+    <span>BUREAU: <strong>IRBID ⇄ CASABLANCA</strong></span>
+  </div>
+</header>
+
+<!-- ───────── HERO ───────── -->
+<section class="hero">
+  <div class="meme-frame">
+    <div class="meme-cap top impact">POV: SHE HASN'T CALLED YET</div>
+    <img src="assets/spongebob-lonely.gif" alt="Lonely spongebob in a diner" />
+    <div class="meme-cap bottom impact">"ALLEOO?" .... *silence*</div>
+  </div>
+
+  <div class="hero-side">
+    <div class="chart">
+      <div class="chart-row"><span class="k">Patient</span><span class="v">MOMEN</span></div>
+      <div class="chart-row"><span class="k">Symptom</span><span class="v">PHONE-CHECK SPASMS</span></div>
+      <div class="chart-row"><span class="k">Diagnosis</span><span class="v red">ALLEOO DEFICIENCY</span></div>
+      <div class="chart-row"><span class="k">Severity</span><span class="v red">CATASTROPHIC</span></div>
+      <div class="chart-row"><span class="k">Prescribed</span><span class="v">ONE (1) VIDEO CALL</span></div>
+      <div class="chart-row"><span class="k">Provider</span><span class="v">DR. FATIMAZAHRA</span></div>
+    </div>
+
+    <div class="quote-box">
+      <div class="q">"It's only been 3 hours and I'm already checking if WhatsApp has a 'is she alive' feature."</div>
+      <div class="a">— Momen, today, while pretending to work</div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────── LIVE STATS ───────── -->
+<section class="stats">
+  <div class="stat" id="stat-jordan">
+    <div class="num" id="jordan-time">--:--</div>
+    <div class="cap">Irbid, me<br/>(suffering loudly)</div>
+  </div>
+  <div class="stat" id="stat-morocco">
+    <div class="num" id="morocco-time">--:--</div>
+    <div class="cap">Casablanca, her<br/>(probably in a meeting)</div>
+  </div>
+  <div class="stat" id="stat-lonely">
+    <div class="num" id="lonely-timer">00:00:00</div>
+    <div class="cap">Since I opened<br/>this page longing</div>
+  </div>
+  <div class="stat" id="stat-kbeeda" title="Click me 💋">
+    <div class="num"><span id="kbeeda-counter">0</span></div>
+    <div class="cap">Times I said<br/>"KBEEDA" (click)</div>
+  </div>
+</section>
+
+<!-- ───────── MEME GRID ───────── -->
+<div class="section-bar">
+  <div class="dot"></div>
+  <h2>LATEST FROM THE LONELY DESK</h2>
+  <div class="line"></div>
+</div>
+
+<div class="meme-grid">
+
+  <!-- Drake -->
+  <article class="meme-card span-6">
+    <span class="tag">CLASSIC</span>
+    <div class="drake">
+      <div class="drake-imgs">
+        <div class="drake-panel">🙅‍♂️</div>
+        <div class="drake-panel">😍</div>
+      </div>
+      <div class="drake-text">
+        <div>Actually finishing my Tuesday tasks</div>
+        <div>Refreshing WhatsApp every 47 seconds</div>
+      </div>
+    </div>
+    <div class="by"><span>// drake.exe</span><span>★ 12.4k</span></div>
+  </article>
+
+  <!-- Galaxy brain -->
+  <article class="meme-card span-6">
+    <span class="tag">EXPANDING</span>
+    <div class="galaxy">
+      <div class="gx-row">
+        <div class="gx-icon">🧠</div>
+        <div class="gx-text">missing my girlfriend</div>
+      </div>
+      <div class="gx-row">
+        <div class="gx-icon">💫</div>
+        <div class="gx-text">missing my <em>kbeeda</em></div>
+      </div>
+      <div class="gx-row">
+        <div class="gx-icon">🌌</div>
+        <div class="gx-text">missing the "alleoo"</div>
+      </div>
+      <div class="gx-row">
+        <div class="gx-icon">✨</div>
+        <div class="gx-text">missing the way she laughs at how dramatic i am</div>
+      </div>
+    </div>
+    <div class="by"><span>// galaxy.png</span><span>★ 8.9k</span></div>
+  </article>
+
+  <!-- This is fine -->
+  <article class="meme-card span-4">
+    <span class="tag">COPING</span>
+    <div class="fine">
+      <div class="fine-stage">
+        <div class="fine-dog">🐶☕</div>
+      </div>
+      <div class="fine-cap">"she's in a meeting<br/>i'm completely fine"</div>
+    </div>
+    <div class="by"><span>// this-is-fine</span><span>★ 14.2k</span></div>
+  </article>
+
+  <!-- Phone refresh meme -->
+  <article class="meme-card span-4">
+    <span class="tag">SUFFERING</span>
+    <div class="phone-meme">
+      <div class="ph">
+        <div class="top-bar"><span>← Fati 🌹</span><span>📞 📹</span></div>
+        <div class="conv">
+          <div class="msg me">kanbgheek 💕</div>
+          <div class="msg me">kbeeda?</div>
+          <div class="msg me">u busy?</div>
+          <div class="msg me">just say "alleoo" once</div>
+          <div class="pending">typing</div>
+        </div>
+      </div>
+      <div class="cap">When she's online<br/>but not typing back</div>
+    </div>
+    <div class="by"><span>// phone.gif</span><span>★ 22.1k</span></div>
+  </article>
+
+  <!-- Loss meme -->
+  <article class="meme-card span-4">
+    <span class="tag">MINIMAL</span>
+    <div class="loss">
+      <div class="loss-cell">
+        <div class="loss-glyph">|</div>
+        <div class="loss-cap">me, awake</div>
+      </div>
+      <div class="loss-cell">
+        <div class="loss-glyph">||</div>
+        <div class="loss-cap">me + my phone</div>
+      </div>
+      <div class="loss-cell">
+        <div class="loss-glyph">|_|</div>
+        <div class="loss-cap">me staring at our chat</div>
+      </div>
+      <div class="loss-cell">
+        <div class="loss-glyph">| |</div>
+        <div class="loss-cap">the 2,734 km between us</div>
+      </div>
+    </div>
+    <div class="by"><span>// loss.txt</span><span>★ 5.6k</span></div>
+  </article>
+
+  <!-- Big headline -->
+  <article class="meme-card span-8">
+    <div class="headline">
+      <div>
+        <div class="label">▸ BREAKING ▸ 2:47 PM IRBID</div>
+        <h3>LOCAL MAN <span class="pinky">REFRESHES</span> WHATSAPP 312 TIMES, EXPERTS <span class="pinky">CONCERNED</span></h3>
+      </div>
+      <div class="by"><span>// front-page</span><span>SUBSCRIBE: 1 / 1</span></div>
+    </div>
+  </article>
+
+  <!-- Spongebob mini reprise -->
+  <article class="meme-card span-4">
+    <span class="tag">RELATABLE</span>
+    <div class="meme-frame" style="border:none; box-shadow:none;">
+      <div class="meme-cap top impact" style="font-size:clamp(14px,2vw,18px);">EXPLAINING TO MY COWORKER</div>
+      <img src="assets/spongebob-lonely.gif" alt="" style="filter:grayscale(0.3);" />
+      <div class="meme-cap bottom impact" style="font-size:clamp(14px,2vw,18px);">WHY I JUST SMILED AT A 🌹 EMOJI</div>
+    </div>
+    <div class="by"><span>// spongey.gif</span><span>★ 18.3k</span></div>
+  </article>
+
+</div>
+
+<!-- ───────── MISSING-YOU METER (GAME) ───────── -->
+<div class="section-bar">
+  <div class="dot"></div>
+  <h2>OFFICIAL MISSING-YOU METER™</h2>
+  <div class="line"></div>
+</div>
+
+<div class="game-wrap">
+  <div class="game-card">
+    <h2>HOW MUCH DO I MISS YOU?</h2>
+    <div class="sub">▸ Tap the button. Fill the meter. Find out. ▸</div>
+
+    <div class="meter">
+      <div class="meter-fill" id="meter-fill"></div>
+      <div class="meter-label" id="meter-label">0% — barely missing you</div>
+    </div>
+
+    <button class="miss-btn" id="miss-btn">+1 MISS</button>
+    <div class="game-hint">spam this button. nothing else matters today.</div>
+  </div>
+</div>
+
+<!-- ───────── CODEWORDS ───────── -->
+<div class="codes-section">
+  <div class="codes-card">
+    <h3>OUR LANGUAGE (TAP A WORD)</h3>
+    <div class="lead">official dictionary of the Momen × Fati Republic.<br/>warning: side effects may include excessive softness.</div>
+    <div class="code-chips">
+      <button class="chip" data-say="Alleoo, lalet rouhi 🌹">ALLEOO</button>
+      <button class="chip" data-say="kanbgheek bzaf 💕">KANBGHEEK</button>
+      <button class="chip" data-say="kan7ma8 3leek 🔥">KAN7MA8 3LEEK</button>
+      <button class="chip" data-say="ya kbeeda 💋">KBEEDA</button>
+      <button class="chip" data-say="3omry, l3omr klo 💝">3OMRY</button>
+      <button class="chip" data-say="bebe ❤️">BEBE</button>
+      <button class="chip" data-say="msatya 🌸">MSATYA</button>
+      <button class="chip" data-say="virtual kiss 💋 incoming">A KISS</button>
+      <button class="chip" data-say="big virtual hug 🫂">A HUG</button>
+      <button class="chip spice" data-say="🎵 ...the music seems so loud tonight? 🎵">🤫 OUR SONG</button>
+    </div>
+  </div>
+</div>
+
+<!-- ───────── LOVE NOTE (TINY, SINCERE) ───────── -->
+<div class="letter-section">
+  <article class="love-note">
+    <div class="stamp">P.S. ★</div>
+    <h2>okay, joke's over.</h2>
+    <div class="ps">— a real one, kbeeda —</div>
+    <p>I built a whole newspaper because we didn't get to talk much today and I missed you that loud.</p>
+    <p>I know you're busy — you always are, and I'm proud of you for it. Call me whenever. Even if it's "alleoo" and you have to hang up after 30 seconds. I'll take it.</p>
+    <p>Until then I'll be here, refreshing, dramatic, your clown. ❤️</p>
+    <div class="sig">— yours, msatya dyalek</div>
+    <div class="codes-line">kanbgheek · kan7ma8 3leek · always</div>
+  </article>
+</div>
+
+<!-- ───────── CALL OVERLAY (easter egg) ───────── -->
+<div class="call-overlay" id="call-overlay" aria-hidden="true">
+  <div class="call-card">
+    <div class="avatar">F</div>
+    <div class="name">Fati 🌹</div>
+    <div class="status"><span class="live-dot"></span> incoming call · video</div>
+    <div class="call-actions">
+      <button class="call-btn decline" id="call-decline" aria-label="Decline">✕</button>
+      <button class="call-btn accept" id="call-accept" aria-label="Accept">📞</button>
+    </div>
+  </div>
+</div>
+
+<!-- ───────── TOAST ───────── -->
+<div class="toast" id="toast">hello there</div>
+
+<!-- ───────── FOOTER ───────── -->
+<footer>
+  built by your <span class="heart">♥</span> clown · for rouhi · 19 may 2026<br/>
+  <span class="easter">psst — type "alleoo" anywhere on this page 👀</span>
+</footer>
+
+<script>
+(() => {
+  // ──────────────── TIME (Jordan UTC+3, Morocco UTC+1) ────────────────
+  function tzNow(offsetH) {
+    const now = new Date();
+    const utc = now.getTime() + now.getTimezoneOffset() * 60000;
+    return new Date(utc + offsetH * 3600000);
+  }
+  function fmtClock(d) {
+    let h = d.getHours();
+    const m = d.getMinutes();
+    const s = d.getSeconds();
+    const ap = h >= 12 ? 'PM' : 'AM';
+    h = h % 12; if (h === 0) h = 12;
+    return `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')} ${ap}`;
+  }
+  function fmtDate(d) {
+    return d.toLocaleDateString('en-GB', { weekday: 'short', day: 'numeric', month: 'short', year: 'numeric' })
+      .toUpperCase().replace(/,/g, '');
+  }
+
+  const jordanEl = document.getElementById('jordan-time');
+  const moroccoEl = document.getElementById('morocco-time');
+  const metaDate = document.getElementById('meta-date');
+
+  function updateClocks() {
+    const jd = tzNow(3);
+    const md = tzNow(1);
+    jordanEl.textContent = fmtClock(jd);
+    moroccoEl.textContent = fmtClock(md);
+    metaDate.textContent = fmtDate(jd);
+  }
+  updateClocks();
+  setInterval(updateClocks, 1000);
+
+  // ──────────────── LONELY TIMER ────────────────
+  const lonelyEl = document.getElementById('lonely-timer');
+  const startTime = Date.now();
+  function updateLonely() {
+    const diff = Math.floor((Date.now() - startTime) / 1000);
+    const h = String(Math.floor(diff / 3600)).padStart(2,'0');
+    const m = String(Math.floor((diff % 3600) / 60)).padStart(2,'0');
+    const s = String(diff % 60).padStart(2,'0');
+    lonelyEl.textContent = `${h}:${m}:${s}`;
+  }
+  updateLonely();
+  setInterval(updateLonely, 1000);
+
+  // ──────────────── KBEEDA COUNTER ────────────────
+  let kbeedaCount = 0;
+  const kbeedaCounter = document.getElementById('kbeeda-counter');
+  document.getElementById('stat-kbeeda').addEventListener('click', (e) => {
+    kbeedaCount++;
+    kbeedaCounter.textContent = kbeedaCount;
+    spawnFloater(e.clientX, e.clientY, 'kbeeda 💋');
+    if (kbeedaCount === 10) showToast('★ KBEEDA COMBO x10');
+    if (kbeedaCount === 50) showToast('★ DANGEROUSLY KBEEDA');
+    if (kbeedaCount === 100) {
+      showToast('★ MAX KBEEDA — RELEASING THE CALL');
+      summonCall();
+    }
+  });
+
+  // ──────────────── FLOATERS ────────────────
+  function spawnFloater(x, y, text, color) {
+    const el = document.createElement('div');
+    el.className = 'floater';
+    el.textContent = text;
+    el.style.left = x + 'px';
+    el.style.top = (y - 10) + 'px';
+    el.style.fontSize = (24 + Math.random() * 14) + 'px';
+    el.style.setProperty('--dx', (Math.random() * 80 - 40) + 'px');
+    el.style.setProperty('--r', (Math.random() * 30 - 15) + 'deg');
+    if (color) el.style.color = color;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 2500);
+  }
+
+  // ──────────────── MISSING-YOU METER ────────────────
+  let miss = 0;
+  const meterFill = document.getElementById('meter-fill');
+  const meterLabel = document.getElementById('meter-label');
+  const missBtn = document.getElementById('miss-btn');
+  const labels = [
+    [0,   'barely missing you (lies)'],
+    [10,  'a little homesick for your voice'],
+    [25,  'okay this is getting real'],
+    [40,  'i miss u i miss u i miss u'],
+    [55,  'send help (or kbeeda)'],
+    [70,  'critical levels of missing'],
+    [85,  '🚨 ALLEOO REQUIRED 🚨'],
+    [99,  'someone get her on the phone'],
+    [100, '💖 OVERFLOWING 💖 call me, kbeeda']
+  ];
+  function pickLabel(p) {
+    let cur = labels[0][1];
+    for (const [t, l] of labels) if (p >= t) cur = l;
+    return cur;
+  }
+  missBtn.addEventListener('click', (e) => {
+    miss = Math.min(100, miss + 3 + Math.random() * 2);
+    meterFill.style.width = miss + '%';
+    meterLabel.textContent = Math.floor(miss) + '% — ' + pickLabel(miss);
+    spawnFloater(e.clientX, e.clientY, ['+1','💕','kbeeda','3omry','miss u','🌹'][Math.floor(Math.random()*6)]);
+    if (miss >= 100) {
+      missBtn.disabled = true;
+      missBtn.textContent = '★ MAXED OUT ★';
+      setTimeout(() => summonCall(), 500);
+      // confetti hearts
+      for (let i = 0; i < 40; i++) {
+        setTimeout(() => {
+          const x = window.innerWidth / 2 + (Math.random() * 200 - 100);
+          const y = window.innerHeight / 2 + (Math.random() * 100 - 50);
+          spawnFloater(x, y, ['❤️','💕','💖','💝','🌹','💋'][Math.floor(Math.random()*6)], '#c92a2a');
+        }, i * 40);
+      }
+    }
+  });
+
+  // ──────────────── CODE CHIPS ────────────────
+  document.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', (e) => {
+      const rect = chip.getBoundingClientRect();
+      const x = rect.left + rect.width / 2;
+      const y = rect.top;
+      spawnFloater(x, y, chip.dataset.say);
+      // little kiss burst
+      for (let i = 0; i < 3; i++) {
+        setTimeout(() => {
+          spawnFloater(x + (Math.random()*60-30), y, ['💋','❤️','✨','🌹'][Math.floor(Math.random()*4)]);
+        }, i * 100);
+      }
+      if (chip.classList.contains('spice')) {
+        showToast('🎵 ...same to you tonight 😉');
+      }
+    });
+  });
+
+  // ──────────────── AUDIO ────────────────
+  const audio = document.getElementById('bg-audio');
+  const pill = document.getElementById('audio-pill');
+  const label = document.getElementById('audio-label');
+  let playing = false;
+
+  function togglePlay() {
+    if (playing) {
+      audio.pause();
+      playing = false;
+      pill.classList.remove('playing');
+      label.textContent = '▶ All By Myself';
+    } else {
+      audio.volume = 0;
+      const p = audio.play();
+      if (p && p.then) {
+        p.then(() => {
+          playing = true;
+          pill.classList.add('playing');
+          label.textContent = '⏸ All By Myself';
+          // fade in
+          let v = 0;
+          const target = 0.6;
+          const step = () => {
+            v = Math.min(target, v + 0.04);
+            audio.volume = v;
+            if (v < target) setTimeout(step, 80);
+          };
+          step();
+        }).catch(() => {});
+      }
+    }
+  }
+  pill.addEventListener('click', togglePlay);
+
+  // Try autoplay on first interaction anywhere
+  let autoStarted = false;
+  function tryAutoStart() {
+    if (autoStarted) return;
+    autoStarted = true;
+    togglePlay();
+  }
+  ['pointerdown', 'keydown', 'touchstart'].forEach(ev => {
+    window.addEventListener(ev, tryAutoStart, { once: true, passive: true });
+  });
+
+  // ──────────────── CALL OVERLAY ────────────────
+  const callOverlay = document.getElementById('call-overlay');
+  function summonCall() {
+    callOverlay.classList.add('show');
+    callOverlay.setAttribute('aria-hidden', 'false');
+  }
+  function dismissCall() {
+    callOverlay.classList.remove('show');
+    callOverlay.setAttribute('aria-hidden', 'true');
+  }
+  document.getElementById('call-decline').addEventListener('click', dismissCall);
+  document.getElementById('call-accept').addEventListener('click', () => {
+    dismissCall();
+    showToast('💕 ALLEOOOOOOOO');
+    // confetti
+    for (let i = 0; i < 30; i++) {
+      setTimeout(() => {
+        const x = Math.random() * window.innerWidth;
+        const y = window.innerHeight * 0.4 + Math.random() * 200;
+        spawnFloater(x, y, ['❤️','💕','💖','🌹','💋','kbeeda'][Math.floor(Math.random()*6)]);
+      }, i * 60);
+    }
+  });
+
+  // ──────────────── TOAST ────────────────
+  const toast = document.getElementById('toast');
+  let toastTimer = null;
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toast.classList.remove('show'), 2400);
+  }
+
+  // ──────────────── EASTER EGG: TYPE "ALLEOO" ────────────────
+  let buffer = '';
+  document.addEventListener('keydown', (e) => {
+    if (e.key.length === 1) {
+      buffer = (buffer + e.key.toLowerCase()).slice(-12);
+      if (buffer.includes('alleoo')) {
+        buffer = '';
+        summonCall();
+        showToast('★ SECRET ALLEOO TRIGGERED');
+      }
+    }
+  });
+
+  // ──────────────── RANDOM SPONGEBOB JIGGLE ────────────────
+  // Every now and then, a "miss u" floats up from the bottom (subtle)
+  const ambientWords = ['miss u', 'kbeeda', 'rouhi', 'kanbgheek', '🌹', '3omry'];
+  function ambientFloater() {
+    const x = Math.random() * window.innerWidth;
+    const y = window.innerHeight - 60;
+    const el = document.createElement('div');
+    el.className = 'floater';
+    el.textContent = ambientWords[Math.floor(Math.random() * ambientWords.length)];
+    el.style.left = x + 'px';
+    el.style.top = y + 'px';
+    el.style.fontSize = (20 + Math.random() * 14) + 'px';
+    el.style.color = '#c92a2a';
+    el.style.opacity = '0.5';
+    el.style.setProperty('--dx', (Math.random() * 120 - 60) + 'px');
+    el.style.animation = 'rise 5s cubic-bezier(0.16,1,0.3,1) forwards';
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 5200);
+  }
+  setInterval(ambientFloater, 7500);
+
+  // ──────────────── HEARTS ON BIG CLICKS ────────────────
+  // (limited - not on every click, just on emojis in memes)
+  document.querySelectorAll('.gx-icon, .drake-panel, .fine-dog').forEach(el => {
+    el.style.cursor = 'pointer';
+    el.addEventListener('click', (e) => {
+      spawnFloater(e.clientX, e.clientY, ['💖','❤️','💕'][Math.floor(Math.random()*3)]);
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
